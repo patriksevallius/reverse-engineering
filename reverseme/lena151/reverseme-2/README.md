@@ -17,4 +17,4 @@ After doing some research on reversing MFC apps I searched the code for initterm
 
 The first call is passed start and stop address with null pointers, the second one is more interesting:
 
-![initterm calls](/reverseme/lena151/reverseme-2/images/initterm functions.png)
+![initterm calls](/reverseme/lena151/reverseme-2/images/initterm-functions.png)
