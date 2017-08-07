@@ -13,4 +13,4 @@ This is my first writeup of a ReverseMe, so bear with me.
 First I loaded the ReverseMe#2.exe in IDA 6.95 demo. Notice the RM (ReverseMe) is an MFC app.
 After doing some research on reversing MFC apps I searched the code for initterm calls. 2 are found near each other called from start.
 
-![initterm calls](/images/initterm.png)
+![initterm calls](/reverseme/lena151/reverseme-2/images/initterm.png)
