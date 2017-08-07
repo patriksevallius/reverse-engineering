@@ -33,3 +33,9 @@ This led me to fireing up ResourceHacker.
 ![initterm calls](/reverseme/lena151/reverseme-2/images/resourcehacker.png)
 
 Would you look at that, it has RCData 129, and it contains what look to be registration strings, probably the false ones Lena151 talked about. sub_42D270 loads the resource and creates a CMemFile object out of it and stores it in this+0xf4.
+
+Back to sub_42C1E0, at 42C5A0 a call to dword ptr [eax+3Ch] is made, eax contains the vtable for the CMemFile from above. This is CMemFile::Read. Additional calls to CMemFile::Read are made. I extracted the RCData 129 to a file and began structuring it according to the read calls.
+
+​
+33
+![initterm calls](/reverseme/lena151/reverseme-2/images/rs129-1.png)
