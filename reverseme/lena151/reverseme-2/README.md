@@ -31,3 +31,5 @@ Browsing through all the calls from sub_42C1E0 I found sub_42D270 that calls Fin
 This led me to fireing up ResourceHacker.
 
 ![initterm calls](/reverseme/lena151/reverseme-2/images/resourcehacker.png)
+
+Would you look at that, it has RCData 129, and it contains what look to be registration strings, probably the false ones Lena151 talked about. sub_42D270 loads the resource and creates a CMemFile object out of it and stores it in this+0xf4.
