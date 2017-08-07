@@ -22,3 +22,12 @@ The first call is passed start and stop address with null pointers, the second o
 If we follow sub_42C1A0 we end up at loc_42BF30. CWinApp::CWinApp() is called, so this is probably the constructor for our main app class. On address 42BFB4 offset off_439F68 is copied into [esi], this is the vtable for our main class:
 
 ![initterm calls](/reverseme/lena151/reverseme-2/images/main-vtable.png)
+
+sub_42C1E0 is CWinThread::InitInstance() and sub_42F6F0 is CWinThread::ExitInstance().
+
+Go to sub_42C1E0 (this is where everything interesting happens) and rename 'lParam' to 'this'.
+Browsing through all the calls from sub_42C1E0 I found sub_42D270 that calls FindResourceA(0, 129, 10). 10 is RT_RCDATA.
+
+This led me to fireing up ResourceHacker.
+
+![initterm calls](/reverseme/lena151/reverseme-2/images/resourcehacker.png)
