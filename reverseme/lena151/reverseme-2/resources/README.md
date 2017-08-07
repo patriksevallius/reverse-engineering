@@ -1,1 +1,1 @@
-# Resousce file 129 extracted from reverseme with ResourceHacker.exe
+# Resource file RCData:129 extracted from reverseme with ResourceHacker.exe
