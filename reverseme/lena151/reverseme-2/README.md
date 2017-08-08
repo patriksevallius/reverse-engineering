@@ -52,3 +52,9 @@ At 42C954, sub_42D660 is called. Here we reads 4 more bytes and treats them as a
 Not much of interest happens until 42CBD4 where sub_41A6A0 is called. Here a new unknown object is created, with a new CMemFile for the same resource and stored at offset 8 in the new object. The object pointer is stored in [ebp+var_198] from the calling method.
 
 Finally at 42CBF4, sub_41A7C0 is called.
+
+sub_41A7C0 calls CMemFile->vtable+0x14 and CMemFile->vtable+0x30 (CMemFile::GetPosition and CMemFile::Seek) then calls sub_41A8D0 and then CMemFile::Seek with the position saved from the CMemFile::GetPosition call. The position it seeks to is passed in as the first argument. The offset is the first 4 bytes we read from the resource file (0x102).
+
+sub_41A8D0 reads one byte from the CMemFile and then switches on that value.
+Accepted values are: 4, 5, 0x12, 0x14, 0x16, 0x1a, 0x1e, 0x2f. All other values are discarded and a new byte is read.
+
