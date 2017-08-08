@@ -37,3 +37,18 @@ Would you look at that, it has RCData 129, and it contains what look to be regis
 Back to sub_42C1E0, at 42C5A0 a call to dword ptr [eax+3Ch] is made, eax contains the vtable for the CMemFile from above. This is CMemFile::Read. Additional calls to CMemFile::Read are made. I extracted the RCData 129 to a file and began structuring it according to the read calls.
 
 ![initterm calls](/reverseme/lena151/reverseme-2/images/rs129-1.png)
+
+The call to sub_42F880 reads 32 more bytes, the last 4 bytes are used as a size, and since it's 0 nothing more happens.
+We then reads 4 more bytes and treats them as a count (0 for this resource file). We repeat this 4 times.
+
+The next interesting call is at 42C88E where sub_42D430 is called. Here we reads 4 more bytes and treats them as a count (0x48 for this resource file). We then read 1 byte 0x48 times. Valid values seems to be 0, 1 and 4.
+
+At 42C8D0, sub_42D540 is called. Here we reads 4 more bytes and treats them as a count (0x19 for this resource file). We then read 4 bytes 0x19 times. These looks like offsets to me.
+
+At 42C912, sub_42D5D0 is called. Here we reads 4 more bytes and treats them as a count (2 for this resource file). We then read 4 bytes 0x19 times. 
+
+At 42C954, sub_42D660 is called. Here we reads 4 more bytes and treats them as a count (0 for this resource file).
+
+Not much of interest happens until 42CBD4 where sub_41A6A0 is called. Here a new unknown object is created, with a new CMemFile for the same resource and stored at offset 8 in the new object. The object pointer is stored in [ebp+var_198] from the calling method.
+
+Finally at 42CBF4, sub_41A7C0 is called.
