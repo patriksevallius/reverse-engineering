@@ -41,7 +41,7 @@ Back to sub_42C1E0, at 42C5A0 a call to dword ptr [eax+3Ch] is made, eax contain
 The call to sub_42F880 reads 32 more bytes, the last 4 bytes are used as a size, and since it's 0 nothing more happens.
 We then reads 4 more bytes and treats them as a count (0 for this resource file). We repeat this 4 times.
 
-The next interesting call is at 42C88E where sub_42D430 is called. Here we reads 4 more bytes and treats them as a count (0x48 for this resource file). We then read 1 byte 0x48 times. Valid values seems to be 0, 1 and 4.
+The next interesting call is at 42C88E where sub_42D430 is called. Here we reads 4 more bytes and treats them as a count (0x48 for this resource file). We then read 1 byte 0x48 times. Valid values seems to be 0 and 1 (the code later checks for 4 but the resource does not contain 4).
 
 At 42C8D0, sub_42D540 is called. Here we reads 4 more bytes and treats them as a count (0x19 for this resource file). We then read 4 bytes 0x19 times. These looks like offsets to me.
 
@@ -56,5 +56,7 @@ Finally at 42CBF4, sub_41A7C0 is called.
 sub_41A7C0 calls CMemFile->vtable+0x14 and CMemFile->vtable+0x30 (CMemFile::GetPosition and CMemFile::Seek) then calls sub_41A8D0 and then CMemFile::Seek with the position saved from the CMemFile::GetPosition call. The position it seeks to is passed in as the first argument. The offset is the first 4 bytes we read from the resource file (0x102).
 
 sub_41A8D0 reads one byte from the CMemFile and then switches on that value.
-Accepted values are: 4, 5, 0x12, 0x14, 0x16, 0x1a, 0x1e, 0x2f. All other values are discarded and a new byte is read.
+Accepted values are: 4, 5, 0x12, 0x14, 0x16, 0x1a, 0x1c, 0x1e, 0x2f and 0x32. All other values are discarded and a new byte is read.
+
+
 
